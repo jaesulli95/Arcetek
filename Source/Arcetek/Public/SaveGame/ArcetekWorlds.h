@@ -13,5 +13,9 @@ UCLASS()
 class ARCETEK_API UArcetekWorlds : public USaveGame
 {
 	GENERATED_BODY()
-	
+public:
+	UPROPERTY()
+	TArray<FString> Worlds;
+
 };
+
