@@ -11,6 +11,11 @@ void UArcetekGameInstance::Init()
 	Super::Init();
 
 	//If Master World List Doesnt Exist Create it
+
+	if (!UGameplayStatics::DoesSaveGameExist("ArcetekWorldList", 0)) {
+		Worlds = Cast<UArcetekWorlds>(UGameplayStatics::CreateSaveGameObject(UArcetekWorlds::StaticClass()));
+		UGameplayStatics::SaveGameToSlot(Worlds, "ArcetekWorldList", 0);
+	}
 }
 
 EWorldCreateResult UArcetekGameInstance::CreateWorld(FString WorldName)
@@ -21,7 +26,7 @@ EWorldCreateResult UArcetekGameInstance::CreateWorld(FString WorldName)
 	}
 
 	Worlds->AddWorld(WorldName);
-	bool bSaveResult = UGameplayStatics::SaveGameToSlot(Worlds, Worlds->ArcetekMasterWorldList, 0);
+	bool bSaveResult = UGameplayStatics::SaveGameToSlot(Worlds, "ArcetekWorldList", 0);
 
 	if (bSaveResult) {
 		//Create The New Save Game Object Here
