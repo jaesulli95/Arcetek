@@ -9,9 +9,27 @@
 /**
  * 
  */
+
+UENUM(BlueprintType)
+enum class EWorldCreateResult : uint8 {
+	EWCR_Created,
+	EWCR_GameExists,
+};
+
 UCLASS()
 class ARCETEK_API UArcetekGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
-	
+public:
+	virtual void Init() override;
+
+	UFUNCTION(BlueprintCallable, Category="Arcetek|Worlds|Utility")
+	EWorldCreateResult CreateWorld(FString WorldName);
+
+	UFUNCTION(BlueprintCallable, Category="Arcetek|Worlds|Utility")
+	bool DeleteWorld(FString WorldName);
+
+protected:
+	UPROPERTY()
+	class UArcetekWorlds* Worlds;
 };

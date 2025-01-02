@@ -14,8 +14,17 @@ class ARCETEK_API UArcetekWorlds : public USaveGame
 {
 	GENERATED_BODY()
 public:
+	
+	UPROPERTY()
+	FString ArcetekMasterWorldList = "ArcetekWorlds";
+	
 	UPROPERTY()
 	TArray<FString> Worlds;
 
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	TArray<FString> GetWorlds();
+
+	void AddWorld(FString WorldName);
+	void DeleteWorld(FString WorldName);
 };
 
