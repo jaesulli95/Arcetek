@@ -29,7 +29,19 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Arcetek|Worlds|Utility")
 	bool DeleteWorld(FString WorldName);
 
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	TArray<FString> GetGameWorlds();
+
+	UFUNCTION(BlueprintCallable)
+	void LoadWorldData(FString WorldName);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	bool CanTransition();
+
 protected:
 	UPROPERTY()
 	class UArcetekWorlds* Worlds;
+
+	UPROPERTY()
+	class UArcetekSaveGame* ArcetekWorld;
 };

@@ -43,3 +43,24 @@ bool UArcetekGameInstance::DeleteWorld(FString WorldName)
 {
 	return false;
 }
+
+TArray<FString> UArcetekGameInstance::GetGameWorlds()
+{
+	if (Worlds) {
+		return Worlds->GetWorlds();
+	}
+	return TArray<FString>();
+}
+
+void UArcetekGameInstance::LoadWorldData(FString WorldName)
+{
+	ArcetekWorld = Cast<UArcetekSaveGame>(UGameplayStatics::LoadGameFromSlot(WorldName, 0));
+}
+
+bool UArcetekGameInstance::CanTransition()
+{
+	if (ArcetekWorld) {
+		return true;
+	}
+	return false;
+}
