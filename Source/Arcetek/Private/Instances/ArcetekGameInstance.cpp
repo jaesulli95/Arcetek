@@ -16,6 +16,9 @@ void UArcetekGameInstance::Init()
 		Worlds = Cast<UArcetekWorlds>(UGameplayStatics::CreateSaveGameObject(UArcetekWorlds::StaticClass()));
 		UGameplayStatics::SaveGameToSlot(Worlds, "ArcetekWorldList", 0);
 	}
+	else {
+		Worlds = Cast<UArcetekWorlds>(UGameplayStatics::LoadGameFromSlot("ArcetekWorldList", 0));
+	}
 }
 
 EWorldCreateResult UArcetekGameInstance::CreateWorld(FString WorldName)
