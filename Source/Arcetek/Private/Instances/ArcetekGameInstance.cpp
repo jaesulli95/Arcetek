@@ -15,13 +15,14 @@ void UArcetekGameInstance::Init()
 	if (!UGameplayStatics::DoesSaveGameExist("ArcetekWorldList", 0)) {
 		Worlds = Cast<UArcetekWorlds>(UGameplayStatics::CreateSaveGameObject(UArcetekWorlds::StaticClass()));
 		UGameplayStatics::SaveGameToSlot(Worlds, "ArcetekWorldList", 0);
+		CreateWorld("Default");
 	}
 	else {
 		Worlds = Cast<UArcetekWorlds>(UGameplayStatics::LoadGameFromSlot("ArcetekWorldList", 0));
 	}
 
 	//Set the default world
-
+	LoadWorldData("Default");
 }
 
 EWorldCreateResult UArcetekGameInstance::CreateWorld(FString WorldName)

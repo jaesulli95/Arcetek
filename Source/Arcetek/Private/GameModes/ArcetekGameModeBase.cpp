@@ -2,6 +2,7 @@
 
 
 #include "GameModes/ArcetekGameModeBase.h"
+#include "Serialization/ObjectAndNameAsStringProxyArchive.h"
 
 /*IArcetekable* _Arcetekable = Cast<IArcetekable>(ActorToSave);
 if (_Arcet1ekable) {
@@ -23,3 +24,30 @@ if (_Arcet1ekable) {
 	}
 	return true;
 */
+
+/*
+	Get all actors with ISaveable and Save The Objects to the level.
+
+*/
+
+AArcetekGameModeBase::AArcetekGameModeBase()
+{
+
+}
+
+
+
+void AArcetekGameModeBase::SaveAllPlacedActors(TArray<AActor*> ActorsToSave)
+{
+	int32 ActorsNum = ActorsToSave.Num();
+	for (int32 i = 0; i < ActorsNum; i++) {
+		TSubclassOf<AActor*>ActorClass = ActorsToSave[i]->GetClass();
+		FTransform T = ActorsToSave[i]->GetActorTransform();
+		TArray<uint8> ActorData;
+		FMemoryWriter MemWriter(ActorData);
+		FObjectAndNameAsStringProxyArchive Ar(MemWriter, true);
+		Ar.ArIsSaveGame = true;
+		Ar.ArNoDelta = true;
+		ActorsToSave[i]->Serialize(Ar);
+	}
+}

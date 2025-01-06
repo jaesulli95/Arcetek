@@ -13,5 +13,10 @@ UCLASS()
 class ARCETEK_API AArcetekGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+
+public:
+	AArcetekGameModeBase();
+
+	UFUNCTION(BlueprintCallable)
+	void SaveAllPlacedActors(TArray<AActor*> ActorsToSave);
 };

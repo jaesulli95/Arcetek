@@ -43,8 +43,6 @@ public:
 };
 
 USTRUCT(Blueprintable, BlueprintType)
-
-USTRUCT(Blueprintable, BlueprintType)
 struct FArcetekableSaveData {
 	GENERATED_BODY();
 public:
