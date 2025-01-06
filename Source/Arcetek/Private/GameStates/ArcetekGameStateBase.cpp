@@ -2,8 +2,4 @@
 
 
 #include "GameStates/ArcetekGameStateBase.h"
-
-AArcetekGameStateBase::AArcetekGameStateBase()
-{
-
-}
+#include "Serialization/ObjectAndNameAsStringProxyArchive.h"
