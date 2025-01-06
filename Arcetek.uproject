@@ -32,6 +32,11 @@
 			"SupportedTargetPlatforms": [
 				"Win64"
 			]
+		},
+		{
+			"Name": "ThumbnailGeneratorPro",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/7b165152e61e4eaeb129e1ae73020811"
 		}
 	]
 }

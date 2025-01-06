@@ -19,6 +19,9 @@ void UArcetekGameInstance::Init()
 	else {
 		Worlds = Cast<UArcetekWorlds>(UGameplayStatics::LoadGameFromSlot("ArcetekWorldList", 0));
 	}
+
+	//Set the default world
+
 }
 
 EWorldCreateResult UArcetekGameInstance::CreateWorld(FString WorldName)
