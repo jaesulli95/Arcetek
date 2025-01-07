@@ -23,6 +23,9 @@ class ARCETEK_API UArcetekGameInstance : public UGameInstance
 public:
 	virtual void Init() override;
 
+	UPROPERTY(BlueprintReadOnly)
+	FString CurrentWorldName;
+
 	UFUNCTION(BlueprintCallable, Category="Arcetek|Worlds|Utility")
 	EWorldCreateResult CreateWorld(FString WorldName);
 
@@ -37,6 +40,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool CanTransition();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	class UArcetekSaveGame* GetSaveGame();
+
+	UFUNCTION(BlueprintCallable)
+	bool SaveCurrentGame();
 
 protected:
 	UPROPERTY()

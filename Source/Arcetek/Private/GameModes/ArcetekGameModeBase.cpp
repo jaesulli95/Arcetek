@@ -3,6 +3,8 @@
 
 #include "GameModes/ArcetekGameModeBase.h"
 #include "Serialization/ObjectAndNameAsStringProxyArchive.h"
+#include "SaveGame/ArcetekSaveGame.h"
+#include "Data/ActorSaveData.h"
 
 /*IArcetekable* _Arcetekable = Cast<IArcetekable>(ActorToSave);
 if (_Arcet1ekable) {
@@ -35,19 +37,15 @@ AArcetekGameModeBase::AArcetekGameModeBase()
 
 }
 
-
-
-void AArcetekGameModeBase::SaveAllPlacedActors(TArray<AActor*> ActorsToSave)
+void AArcetekGameModeBase::SaveAllPlacedActors(UArcetekSaveGame* SaveGame, TArray<AActor*> ActorsToSave)
 {
 	int32 ActorsNum = ActorsToSave.Num();
+	SaveGame->EmptyWorldData();
 	for (int32 i = 0; i < ActorsNum; i++) {
-		TSubclassOf<AActor*>ActorClass = ActorsToSave[i]->GetClass();
+		TSubclassOf<AActor>ActorClass = ActorsToSave[i]->GetClass();
 		FTransform T = ActorsToSave[i]->GetActorTransform();
-		TArray<uint8> ActorData;
-		FMemoryWriter MemWriter(ActorData);
-		FObjectAndNameAsStringProxyArchive Ar(MemWriter, true);
-		Ar.ArIsSaveGame = true;
-		Ar.ArNoDelta = true;
-		ActorsToSave[i]->Serialize(Ar);
+
+		FActorSaveData Data = FActorSaveData(ActorsToSave[i]->GetClass(), ActorsToSave[i]->GetActorTransform());
+		SaveGame->AddActorData(Data);
 	}
 }

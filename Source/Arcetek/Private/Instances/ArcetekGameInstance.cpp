@@ -59,6 +59,9 @@ TArray<FString> UArcetekGameInstance::GetGameWorlds()
 void UArcetekGameInstance::LoadWorldData(FString WorldName)
 {
 	ArcetekWorld = Cast<UArcetekSaveGame>(UGameplayStatics::LoadGameFromSlot(WorldName, 0));
+	if (ArcetekWorld) {
+		CurrentWorldName = WorldName;
+	}
 }
 
 bool UArcetekGameInstance::CanTransition()
@@ -67,4 +70,14 @@ bool UArcetekGameInstance::CanTransition()
 		return true;
 	}
 	return false;
+}
+
+UArcetekSaveGame* UArcetekGameInstance::GetSaveGame()
+{
+	return ArcetekWorld;
+}
+
+bool UArcetekGameInstance::SaveCurrentGame()
+{
+	return UGameplayStatics::SaveGameToSlot(ArcetekWorld, CurrentWorldName, 0);
 }

@@ -3,3 +3,17 @@
 
 #include "SaveGame/ArcetekSaveGame.h"
 
+TArray<FActorSaveData> UArcetekSaveGame::GetWorldData()
+{
+	return WorldData;
+}
+
+void UArcetekSaveGame::EmptyWorldData()
+{
+	WorldData.Empty();
+}
+
+void UArcetekSaveGame::AddActorData(FActorSaveData ActorData)
+{
+	WorldData.Add(ActorData);
+}

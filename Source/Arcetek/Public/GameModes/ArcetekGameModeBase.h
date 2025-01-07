@@ -9,6 +9,9 @@
 /**
  * 
  */
+
+class UArcetekSaveGame;
+
 UCLASS()
 class ARCETEK_API AArcetekGameModeBase : public AGameModeBase
 {
@@ -18,5 +21,5 @@ public:
 	AArcetekGameModeBase();
 
 	UFUNCTION(BlueprintCallable)
-	void SaveAllPlacedActors(TArray<AActor*> ActorsToSave);
+	void SaveAllPlacedActors(UArcetekSaveGame* SaveGame, TArray<AActor*> ActorsToSave);
 };
