@@ -35,7 +35,7 @@
 		},
 		{
 			"Name": "ThumbnailGeneratorPro",
-			"Enabled": true,
+			"Enabled": false,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/7b165152e61e4eaeb129e1ae73020811"
 		}
 	]
