@@ -18,6 +18,7 @@ void UArcetekComponent::SetCurrentArcetekable(AActor* ActorToModify)
 void UArcetekComponent::EnterBuildMode(bool isBuilding)
 {
 	bIsBuilding = isBuilding;
+	BuildStateUpdated.Broadcast(bIsBuilding);
 }
 
 void UArcetekComponent::RotateActor(float Rate)

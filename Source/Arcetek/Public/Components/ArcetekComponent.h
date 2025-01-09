@@ -19,6 +19,18 @@ enum class EArcetekableType : uint8 {
 	EAT_NPC UMETA(DisplayName = "NPC")
 };
 
+
+USTRUCT(Blueprintable, BlueprintType)
+struct FArcetekPlacementData {
+	GENERATED_BODY()
+public:
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	bool bGrounded = true;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	FVector Offset = FVector();
+};
+
 USTRUCT(Blueprintable, BlueprintType)
 struct FArcetekableData : public FTableRowBase {
 	GENERATED_BODY()
@@ -36,35 +48,22 @@ public:
 	TSubclassOf<AActor> ActorClass;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
-	bool bGrounded = true;
-
-	UPROPERTY(BlueprintReadOnly, EditAnywhere)
-	FVector Offset = FVector();
+	FArcetekPlacementData PlacementData = FArcetekPlacementData();
 };
 
-USTRUCT(Blueprintable, BlueprintType)
-struct FArcetekableSaveData {
-	GENERATED_BODY();
-public:
-	UPROPERTY()
-	FName RowNameId;
-
-	UPROPERTY()
-	FTransform Transform;
-
-	UPROPERTY()
-	TArray<uint8> Data;
-};
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBuildStateUpdatedDelegate, bool, isBuilding);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable )
 class ARCETEK_API UArcetekComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UArcetekComponent();
+
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category="Data")
+	TObjectPtr<class UDataTable> Arcetekables;
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category="Data")
 	float RotationRate = 10.0F;
@@ -83,6 +82,11 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="Arcetek|Utility")
 	void RotateActor(float Rate);
+
+
+	//EVENTS AND DELEGATES
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FBuildStateUpdatedDelegate BuildStateUpdated;
 
 protected:
 	// Called when the game starts
