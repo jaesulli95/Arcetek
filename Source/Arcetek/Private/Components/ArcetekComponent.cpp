@@ -31,6 +31,11 @@ void UArcetekComponent::RotateActor(float Rate)
 	CurrentActor->SetActorRotation(FRotator(Rotation.Pitch, Rotation.Yaw + Rate, Rotation.Roll));
 }
 
+void UArcetekComponent::TryCreateArcetekable(FArcetekableData Data)
+{
+
+}
+
 // Called when the game starts
 void UArcetekComponent::BeginPlay()
 {

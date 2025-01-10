@@ -83,6 +83,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Arcetek|Utility")
 	void RotateActor(float Rate);
 
+	UFUNCTION(BlueprintCallable, Category="Arcetek|Utility")
+	void TryCreateArcetekable(FArcetekableData Data);
+
 
 	//EVENTS AND DELEGATES
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
