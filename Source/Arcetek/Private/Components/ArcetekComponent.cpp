@@ -2,6 +2,7 @@
 
 
 #include "Components/ArcetekComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
 UArcetekComponent::UArcetekComponent()
@@ -33,7 +34,13 @@ void UArcetekComponent::RotateActor(float Rate)
 
 void UArcetekComponent::TryCreateArcetekable(FArcetekableData Data)
 {
-
+	if (CurrentActor != nullptr) {
+		return;
+	}
+	AActor* NewActor = GetWorld()->SpawnActor<AActor>(Data.ActorClass, FTransform());
+	if (NewActor) {
+		SetCurrentArcetekable(NewActor);
+	}
 }
 
 // Called when the game starts

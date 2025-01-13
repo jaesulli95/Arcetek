@@ -7,7 +7,7 @@
 #include "Interact.generated.h"
 
 // This class does not need to be modified.
-UINTERFACE(MinimalAPI)
+UINTERFACE(NotBlueprintable)
 class UInteract : public UInterface
 {
 	GENERATED_BODY()
@@ -22,4 +22,7 @@ class ARCETEK_API IInteract
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
+
+	UFUNCTION(BlueprintCallable)
+	virtual void Interact(class AArcetekCharacter* Character);
 };
