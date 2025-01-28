@@ -17,6 +17,9 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	FTransform Transform;
 
+	UPROPERTY(BlueprintReadOnly)
+	TArray<uint8> Data;
+
 	FActorSaveData() {
 
 	}
@@ -24,5 +27,9 @@ public:
 	FActorSaveData(TSubclassOf<AActor> ActorClass, FTransform ActorTransform) {
 		Class = ActorClass;
 		Transform = ActorTransform;
+	}
+
+	void SetData(TArray<uint8> ActorData) {
+		Data = ActorData;
 	}
 };

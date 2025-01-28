@@ -29,7 +29,6 @@ if (_Arcet1ekable) {
 
 /*
 	Get all actors with ISaveable and Save The Objects to the level.
-
 */
 
 AArcetekGameModeBase::AArcetekGameModeBase()
@@ -46,6 +45,12 @@ void AArcetekGameModeBase::SaveAllPlacedActors(UArcetekSaveGame* SaveGame, TArra
 		FTransform T = ActorsToSave[i]->GetActorTransform();
 
 		FActorSaveData Data = FActorSaveData(ActorsToSave[i]->GetClass(), ActorsToSave[i]->GetActorTransform());
+		
+		FMemoryWriter MemWriter(Data.Data);
+		FObjectAndNameAsStringProxyArchive Ar(MemWriter, true);
+		Ar.ArIsSaveGame = true;
+		Ar.ArNoDelta = true;
+		ActorsToSave[i]->Serialize(Ar);
 		SaveGame->AddActorData(Data);
 	}
 }
