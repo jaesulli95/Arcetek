@@ -22,4 +22,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SaveAllPlacedActors(UArcetekSaveGame* SaveGame, TArray<AActor*> ActorsToSave);
+
+	UFUNCTION(BlueprintCallable)
+	void LoadActorData(AActor* StagedActor, TArray<uint8> Data);
 };

@@ -54,3 +54,12 @@ void AArcetekGameModeBase::SaveAllPlacedActors(UArcetekSaveGame* SaveGame, TArra
 		SaveGame->AddActorData(Data);
 	}
 }
+
+void AArcetekGameModeBase::LoadActorData(AActor* StagedActor, TArray<uint8> ActorByteData)
+{
+	FMemoryReader MemReader(ActorByteData);
+	FObjectAndNameAsStringProxyArchive Ar(MemReader, true);
+	Ar.ArIsSaveGame = true;
+	StagedActor->Serialize(Ar);
+
+}
